@@ -43,6 +43,5 @@ func main() {
         var response Response
         json.Unmarshal(data, &response)
 
-        fmt.Printf("%s\n", response.Brl.Bid)
-        fmt.Printf("%s\n", response.Brl.Name)
+        fmt.Printf("Dólar hoje: %s\n", response.Brl.Bid)
 }
