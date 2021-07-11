@@ -19,7 +19,7 @@ type Exchange struct {
         Name string `json:"name"`
         PctChange string `json:"pctChange"`
         Timestamp string `json:"timestamp"`
-        VarBid string `json:"varBid"`
+        VarBid int64 `json:"varBid"`
 }
 
 type ExchangeUsdBrl struct {
@@ -43,5 +43,14 @@ func main() {
         var response Response
         json.Unmarshal(data, &response)
 
-        fmt.Printf("Dólar hoje: %s\n", response.Brl.Bid)
+        emoji := func() string {
+                if response.Brl.VarBid > 0 {
+                        return ":arrow_up_small:"
+                } else if response.Brl.VarBid < 0 {
+                        return ":arrow_down_small:"
+                }
+                return ":black_square_for_stop:"
+        }()
+
+        fmt.Printf("Dólar hoje: %s %s\n", response.Brl.Bid, emoji)
 }
